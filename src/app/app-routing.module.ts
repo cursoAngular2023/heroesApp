@@ -10,6 +10,12 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule )
   },
   {
+    // Cuando alguien entre al 'heroes' se cargarán sus módulos hijos
+    // devolviendo el módulo  'HeroesModule'
+    path: 'heroes',
+    loadChildren: () => import('./heroes/heroes.module').then( m => m.HeroesModule )
+  },
+  {
     path: '404',
     component: ErrorPageComponent
   },
