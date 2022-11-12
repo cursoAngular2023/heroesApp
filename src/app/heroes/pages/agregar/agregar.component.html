@@ -1,15 +1,21 @@
 <h1>Nuevo Héroe <small>asd</small></h1>
 
-<div fxLayout="row" fxLayoutGap="40px">
+<div fxLayout="row" 
+     fxLayoutGap="40px" 
+     fxLayout.xs="column">
 
     <div fxFlex="50" fxLayout="column">
 
-        <div fxLayout="row" fxLayoutGap="20px">
-            <mat-form-field>
+        <div fxLayout="row"
+             fxLayout.xs="column" 
+             fxLayoutGap="20px">
+            <mat-form-field fxFlex="100"
+                            fxLayout.xs="column">
                 <mat-label>Super Héroe</mat-label>
                 <input matInput 
                        aria-label="super heroe"
                        type="text" 
+                       [(ngModel)]="heroe.superhero"
                        required>
             </mat-form-field>
 
@@ -18,6 +24,7 @@
                 <input matInput 
                        aria-label="alter ego"
                        type="text" 
+                       [(ngModel)]="heroe.alter_ego"
                        required>
             </mat-form-field>
         </div>
@@ -28,6 +35,7 @@
             <input matInput
                    aria-label="primera aparición" 
                    type="text" 
+                   [(ngModel)]="heroe.first_appearance"
                    required>
         </mat-form-field>
 
@@ -36,12 +44,14 @@
             <input matInput 
                    aria-label="personajes"
                    type="text" 
+                   [(ngModel)]="heroe.characters"
                    required>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Creador</mat-label>
-                <mat-select>
+                <mat-select [(ngModel)]="heroe.publisher" 
+                            required>
                     <mat-option *ngFor="let publisher of publishers" 
                                 [value]="publisher.id">
                         {{ publisher.desc }}
@@ -54,15 +64,30 @@
             <input matInput
                    aria-label="foto url" 
                    type="url" 
+                   [(ngModel)]="heroe.alt_img"
                    required>
         </mat-form-field>
 
         <br>
 
-        <button mat-raised-button color="primary">
-            <mat-icon>edit</mat-icon>
-            Guardar
-        </button>
+        <div fxLayout>
+            <button mat-raised-button 
+                color="primary"
+                (click)="guardar()">
+                <mat-icon>edit</mat-icon>
+                    Guardar
+            </button>
+
+            <span class="spacer"></span>
+            
+            <button *ngIf="heroe.id"
+                    mat-raised-button
+                    (click)="borrarHeroe()"
+                    color="warn">
+                <mat-icon>remove</mat-icon>
+                    Borrar
+            </button>
+        </div>
         
     </div>
     
