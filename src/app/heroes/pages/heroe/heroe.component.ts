@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { Auth } from 'src/app/auth/interfaces/auth.interface';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { Heroe } from '../../interfaces/heroes.interface';
 import { HeroesService } from '../../services/heroes.service';
 
@@ -18,9 +20,14 @@ export class HeroeComponent implements OnInit {
 
   heroe!: Heroe;
 
+  get auth(): Auth {
+    return this.authService.auth;
+  }
+
   constructor( private activatedRoute: ActivatedRoute,
               private heroesService: HeroesService,
-              private router: Router ) { }
+              private router: Router,
+              private authService: AuthService ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params
